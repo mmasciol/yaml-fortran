@@ -43,11 +43,3 @@ set_source_files_properties("./test-sequence-map-pair.f90"
 )
 add_executable(test-sequence-map-pair "./test-sequence-map-pair.f90")
 target_link_libraries(test-sequence-map-pair yaml-interface)
-
-
-set_source_files_properties("./test-orcaflex.f90"
-    PROPERTIES
-        COMPILE_FLAGS "${CMAKE_FORTRAN_FLAGS}"
-)
-add_executable(test-orcaflex "./test-orcaflex.f90")
-target_link_libraries(test-orcaflex yaml-interface)

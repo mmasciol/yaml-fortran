@@ -14,7 +14,7 @@ endif()
 
 message(STATUS "Compiling yaml-fortran with options ${CMAKE_FORTRAN_FLAGS}")
 
-set(src-pattern "src/*.f90")
+set(src-pattern "*.f90")
 file(GLOB yaml-f90-sources ${src-pattern})
 set(YAML_F90_SOURCES ${yaml-f90-sources})
 set_source_files_properties(${yaml-f90-sources} PROPERTIES COMPILE_FLAGS "${CMAKE_FORTRAN_FLAGS}")
