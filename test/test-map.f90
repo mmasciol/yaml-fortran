@@ -16,7 +16,7 @@ program TestMap
 #ifdef _WIN64
   fpath = "..\..\..\..\..\pkg\f-yaml\yaml-fortran\test\test.yaml" ! windows
 #else
-  fpath = "../pkg/f-yaml/yaml-fortran/test/test.yaml" ! linux
+  fpath = "./test.yaml" ! linux
 #endif
 
   domain = yaml_open_file(fpath)
