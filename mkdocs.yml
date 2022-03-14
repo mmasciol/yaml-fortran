@@ -1,0 +1,50 @@
+site_name: YAML Fortran
+site_description: YAML Fortran
+docs_dir: docs
+site_dir: artifacts/docs
+repo_url: https://github.com/mmasciol/yaml-fortran
+edit_uri: ""
+use_directory_urls: false
+strict: true
+dev_addr: '127.0.0.1:8000'
+
+
+plugins:
+  - mkdocstrings
+  - search
+
+
+markdown_extensions:
+  - mdx_math:
+      enable_dollar_delimiter: True
+  - markdown_include.include:
+      base_path: docs
+  - markdown-fortran.wrap:
+      base_path: docs
+      encoding: 'utf-8'
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed
+  - pymdownx.snippets
+  - toc:
+      toc_depth: 12
+
+
+extra_javascript:
+  - https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML
+  - mathjax-config.js
+
+
+theme:
+  name: material
+  highlightjs:
+    - True
+  features:
+    - navigation.tabs
+
+
+nav:
+  - Overview: index.md
+  - Developer:
+    - Fortran YAML: user.md

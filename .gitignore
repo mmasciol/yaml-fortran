@@ -1,6 +1,7 @@
 # -------- directories
-build
+artifacts
 bin
+build
 
 # -------- Unit test / coverage reports
 .coverage
@@ -40,4 +41,3 @@ bin
 *.html
 *-convert.htm
 *.sta
-
