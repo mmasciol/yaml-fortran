@@ -72,16 +72,16 @@ set_target_properties(test-sequence-map-pair
 )
 
 
-set_target_properties(yaml-wrapper PROPERTIES FOLDER "yaml")
-set_target_properties(yaml-interface PROPERTIES FOLDER "yaml")
-set_target_properties(yaml-cpp PROPERTIES FOLDER "yaml")
-set_target_properties(test-map PROPERTIES FOLDER "yaml/test")
-set_target_properties(test-sequence PROPERTIES FOLDER "yaml/test")
-set_target_properties(test-sequence-nest PROPERTIES FOLDER "yaml/test")
-set_target_properties(test-sequence-map-pair PROPERTIES FOLDER "yaml/test")
-set_target_properties(yaml-cpp-parse PROPERTIES FOLDER "yaml")
-set_target_properties(yaml-cpp-read PROPERTIES FOLDER "yaml")
-set_target_properties(yaml-cpp-sandbox PROPERTIES FOLDER "yaml")
+set_target_properties(yaml-wrapper PROPERTIES FOLDER "yaml-fortran")
+set_target_properties(yaml-interface PROPERTIES FOLDER "yaml-fortran")
+set_target_properties(yaml-cpp PROPERTIES FOLDER "yaml-cpp")
+set_target_properties(test-map PROPERTIES FOLDER "yaml-fortran/test")
+set_target_properties(test-sequence PROPERTIES FOLDER "yaml-fortran/test")
+set_target_properties(test-sequence-nest PROPERTIES FOLDER "yaml-fortran/test")
+set_target_properties(test-sequence-map-pair PROPERTIES FOLDER "yaml-fortran/test")
+set_target_properties(yaml-cpp-parse PROPERTIES FOLDER "yaml-cpp")
+set_target_properties(yaml-cpp-read PROPERTIES FOLDER "yaml-cpp")
+set_target_properties(yaml-cpp-sandbox PROPERTIES FOLDER "yaml-cpp")
 
 target_include_directories(yaml-wrapper
     PRIVATE  "${PROJECT_BINARY_DIR}/yaml-cpp/include")
@@ -97,6 +97,7 @@ target_include_directories(test-sequence-nest
 
 target_include_directories(test-sequence-map-pair
     PRIVATE  "${PROJECT_BINARY_DIR}/src/yaml-fortran")
-	
+
 
 configure_file("${PROJECT_BINARY_DIR}/../test/test.yaml" "${PROJECT_BINARY_DIR}/../bin/test.yaml" COPYONLY)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
