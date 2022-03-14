@@ -1,0 +1,60 @@
+parent:  # map
+    child1:
+        boolean_flag: true
+        an_aray: [0.999, 1.0]
+        array_int_2d: [[1,   2,  3],[4,   5,  6],[7,   8,  9],[10, 11, 12]]
+    child_22222:
+        boolean_flag: false
+        an_aray: [-1.0, -0.99]
+        array_float_2d:
+          - [1.1, 2.2, 3.3]
+          - [4.4, 5.5, 6.6]
+          - [7.7, 8.8, 9.9]
+
+sequence_type:  # sequence
+  - item_is_string: Test string. This line will print to console.
+    item_is_integer_array: [-3, -2, -1, 0, 1, 2, 3]
+    item_is_integer: -10
+    item_is_float: 10.8
+    item_is_float_array: [-3, -2.3, -1.1, 0, 1, 2, 3.3]
+    item_is_integer_array_2d: [[1,   2,  3],[4,   5,  6],[7,   8,  9],[10, 11, 12]]
+    item_is_integer_array_2d_symmetric:
+      - [1,   2,  3]
+      - [4,   5,  6]
+      - [7,   8,  9]
+    item_is_float_array_2d: [[1.1,   2.2,    3.3],[4.4,   5.5,    6.6],[7.7,   8.8,    9.9],[10.0, 11.11, 12.12]]
+    item_is_float_array_2d_symmetric:
+      - [1.1, 2.2, 3.3]
+      - [4.4, 5.5, 6.6]
+      - [7.7, 8.8, 9.9]
+    nested_map:
+        value1: 3.14159264
+        another_value: 6.28318528
+        super_nested_map:
+            third_level_value: [1,2,3,10]
+  - item_is_string: Second element in the sequence.
+    item_is_integer_array: [14, 14, 14]
+    item_is_integer: -10000
+    item_is_float: 10000.8
+    item_is_float_array: [-15.5, -15.5, -15.5, -15.5,  -15.5]
+    item_is_integer_array_2d: [[1,   2,  3],[4,   5,  6]]
+    item_is_integer_array_2d_symmetric:
+      - [1,   2]
+      - [4,   5]
+    item_is_float_array_2d: [[1.1,   2.2,    3.3],[4.4,   5.5,    6.6]]
+    item_is_float_array_2d_symmetric:
+      - [1.1, 2.2]
+      - [4.4, 5.5]
+    nested_sequence:
+      - interval: 0.0
+        value: [0.0, 0.0, 0.0]
+      - interval: 10.0
+        value: [1.0, 1.0, 1.0]
+      - interval: 20.0
+        value: [2.0, 2.0, 2.0]
+      - interval: 30.0
+        value: [3.0, 3.0, 3.0]
+      - interval: 40.0
+        value: [4.0, 4.0, 4.0]
+      - interval: 50.0
+        value: [5.0, 5.0, 5.0]

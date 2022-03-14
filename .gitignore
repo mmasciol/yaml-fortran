@@ -1,0 +1,38 @@
+# -------- Unit test / coverage reports -----------------
+.coverage
+
+# -------- Compiled source -----------------
+*.dll
+*.exe
+*.o
+*.mod
+*.so
+*.py[cod]
+
+# -------- Packages -----------------
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# -------- Log & Binary Files -----------------
+*.log
+*.h5
+*.bson
+*.bhb
+
+# -------- IDE Configs -----------------
+*.orig
+*.vcxproj
+*.vscode
+*.vfproj.*.user
+*.suo
+*.u2d
+*.htm
+*.html
+*-convert.htm
+*.sta
