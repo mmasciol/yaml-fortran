@@ -1,7 +1,12 @@
-# -------- Unit test / coverage reports -----------------
+# -------- directories
+artifacts
+bin
+build
+
+# -------- Unit test / coverage reports
 .coverage
 
-# -------- Compiled source -----------------
+# -------- Compiled source
 *.dll
 *.exe
 *.o
@@ -9,7 +14,7 @@
 *.so
 *.py[cod]
 
-# -------- Packages -----------------
+# -------- Packages
 *.7z
 *.dmg
 *.gz
@@ -19,13 +24,13 @@
 *.tar
 *.zip
 
-# -------- Log & Binary Files -----------------
+# -------- Log & Binary Files
 *.log
 *.h5
 *.bson
 *.bhb
 
-# -------- IDE Configs -----------------
+# -------- IDE Configs
 *.orig
 *.vcxproj
 *.vscode

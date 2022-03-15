@@ -19,8 +19,8 @@ endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
 message(STATUS "Compiling yaml-wrapper with options ${CMAKE_C_FLAGS}")
 
-set(src-pattern "src/*.cc")
-set(header-pattern "src/*.h")
+set(src-pattern "*.cc")
+set(header-pattern "*.h")
 
 file(GLOB yaml-cpp-sources ${src-pattern})
 file(GLOB yaml-header-sources ${header-pattern})
