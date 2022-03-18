@@ -21,17 +21,16 @@ terraform {
   }
 }
 
-# variable "aws_region" {
-#   type = string
-# }
+variable "aws_region" {
+  type = string
+}
 
-# variable "domain_name" {
-#   type = string
-# }
+variable "domain_name" {
+  type = string
+}
 
 provider "aws" {
   region = "us-west-2"
-  # version = "~> 2.52"
 }
 
 module "website" {
