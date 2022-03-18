@@ -1,3 +1,5 @@
+# ./main.tf
+
 terraform {
   required_providers {
     aws = {
@@ -13,29 +15,69 @@ terraform {
 
   cloud {
     organization = "masciola-dev"
-
     workspaces {
       name = "gh-actions"
     }
   }
 }
 
+# variable "aws_region" {
+#   type = string
+# }
+
+# variable "domain_name" {
+#   type = string
+# }
+
 provider "aws" {
   region = "us-west-2"
+  version = "~> 2.52"
 }
 
-resource "aws_s3_bucket" "b" {
-  bucket = "yaml-fortran-doc"
-  # acl    = "private"
-  tags = {
-    Name        = "yaml-fortran"
-    Environment = "Production"
-  }
+module "website" {
+  source = "./.github/terraform"
+  domain_name = var.domain_name
 }
 
-output "web-address" {
-  value = "${aws_instance.web.public_dns}:8080"
-}
+
+# terraform {
+#   required_providers {
+#     aws = {
+#       source  = "hashicorp/aws"
+#       version = "3.26.0"
+#     }
+#     random = {
+#       source  = "hashicorp/random"
+#       version = "3.0.1"
+#     }
+#   }
+#   required_version = ">= 1.1.0"
+#
+#   cloud {
+#     organization = "masciola-dev"
+#
+#     workspaces {
+#       name = "gh-actions"
+#     }
+#   }
+# }
+#
+# provider "aws" {
+#   region = "us-west-2"
+# }
+#
+# resource "aws_s3_bucket" "b" {
+#   bucket = "yaml-fortran-doc"
+#   # acl    = "private"
+#   tags = {
+#     Name        = "yaml-fortran"
+#     Environment = "Production"
+#   }
+# }
+#
+# output "web-address" {
+#   value = "${aws_instance.web.public_dns}:8080"
+# }
 
 
 #
