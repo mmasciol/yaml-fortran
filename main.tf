@@ -25,7 +25,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "b" {
-  bucket = "yaml_fortran_doc"
+  bucket = "yaml-fortran-doc"
   acl    = "private"
 
 }
