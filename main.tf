@@ -26,8 +26,11 @@ provider "aws" {
 
 resource "aws_s3_bucket" "b" {
   bucket = "yaml-fortran-doc"
-  acl    = "public"
-
+  # acl    = "private"
+  tags = {
+    Name        = "yaml-fortran"
+    Environment = "Production"
+  }
 }
 
 output "web-address" {
