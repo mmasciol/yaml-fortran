@@ -2,6 +2,8 @@
 artifacts
 bin
 build
+.terraform
+.DS_Store
 
 # -------- Unit test / coverage reports
 .coverage

@@ -21,20 +21,12 @@ terraform {
   }
 }
 
-variable "aws_region" {
-  type = string
-}
-
-variable "domain_name" {
-  type = string
-}
-
 provider "aws" {
   region = "us-west-2"
 }
 
 module "website" {
-  source = "./.github/terraform"
+  source = "./aws-resources/"
   domain_name = var.domain_name
 }
 
