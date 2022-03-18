@@ -20,8 +20,8 @@ terraform {
   }
 }
 
-resource "aws_s3_bucket" "yaml_fortran_doc" {
-  bucket = "my_s3_bucket"
+resource "aws_s3_bucket" "b" {
+  bucket = "yaml_fortran_doc"
   acl    = private
 
 }
