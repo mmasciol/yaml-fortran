@@ -1,5 +1,7 @@
 # YAML Fortran library
 
+Want modern capabilities in legacy fortran code?
+YAML-Fortran has you covered.
 
 ## To build on linux:
 
