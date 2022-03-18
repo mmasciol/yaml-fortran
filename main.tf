@@ -20,15 +20,17 @@ terraform {
   }
 }
 
+provider "aws" {
+  region = "us-west-2"
+}
+
 resource "aws_s3_bucket" "b" {
   bucket = "yaml_fortran_doc"
   acl    = private
 
 }
 
-provider "aws" {
-  region = "us-west-2"
-}
+
 #
 # resource "random_pet" "sg" {}
 #
