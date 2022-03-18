@@ -26,8 +26,12 @@ provider "aws" {
 
 resource "aws_s3_bucket" "b" {
   bucket = "yaml-fortran-doc"
-  acl    = "private"
+  acl    = "public"
 
+}
+
+output "web-address" {
+  value = "${aws_instance.web.public_dns}:8080"
 }
 
 
