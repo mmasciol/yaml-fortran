@@ -31,7 +31,7 @@ terraform {
 
 provider "aws" {
   region = "us-west-2"
-  version = "~> 2.52"
+  # version = "~> 2.52"
 }
 
 module "website" {

@@ -1,6 +1,6 @@
 # .github/terraform/variables.tf
 
 variable "domain_name" {
-  type  = string
-  value = "yaml-fortran.com"
+  type    = string
+  default = "yaml-fortran.com"
 }
