@@ -16,9 +16,8 @@ jobs:
 
       - name: Make
         run: |
-          sudo apt-get update
+          sudo apt-get update -y
           sudo apt-get install -y cmake
-          sudo apt-get install -y valgrind
           sudo apt-get install -y gfortran
           mkdir ./build
           cd build
