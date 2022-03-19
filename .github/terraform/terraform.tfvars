@@ -1,2 +1,2 @@
-aws_region = "us-east-1"
-domain_name = "yaml-fortran.com"
+#aws_region = "us-west-2"
+#domain_name = "yaml-fortran.com"
