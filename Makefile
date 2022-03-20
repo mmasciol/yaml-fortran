@@ -25,4 +25,4 @@ make-documenation:
 
 .PHONY: test-execution
 test-execution:
-	. ./bin/test-map
+	./bin/test-map
