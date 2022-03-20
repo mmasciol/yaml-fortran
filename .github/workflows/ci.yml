@@ -95,14 +95,15 @@ jobs:
           name: coverage
           path: .coverage/*
           retention-days: 7
-      - uses: codecov/codecov-action@v2
+      - name: coverage report badge
+        uses: codecov/codecov-action@v2
         with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          token: ${{secrets.CODECOV_TOKEN}}
           files: ./coverage.xml
-          flags: unittests # optional
-          name: codecov-umbrella # optional
-          fail_ci_if_error: true # optional (default = false)
-          # verbose: true # optional (default = false)
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          verbose: true
 
   documentation:
     needs: [test-coverage-report]
