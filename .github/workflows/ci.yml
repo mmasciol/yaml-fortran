@@ -37,6 +37,9 @@ jobs:
           path: bin/*
           retention-days: 1
 
+      - name: test-execution
+        run: make test-execution
+
       # - name: archive build artifact
       #   uses: actions/upload-artifact@v3
       #   with:
@@ -64,9 +67,6 @@ jobs:
         with:
           name: binaries
           path: bin
-
-      - name: test-execution
-        run: make test-execution
 
       # - name: download build artifact
       #   uses: actions/download-artifact@v3
