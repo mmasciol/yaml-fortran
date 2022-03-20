@@ -10,3 +10,12 @@ resource "aws_s3_bucket" "website_bucket" {
     error_document = "index.html"
   }
 }
+
+resource "aws_s3_bucket" "www_website_bucket" {
+  bucket = "www.${var.domain_name}"
+  acl = "public-read"
+  force_destroy = true
+  website {
+    redirect_all_requests_to = var.domain_name
+  }
+}
