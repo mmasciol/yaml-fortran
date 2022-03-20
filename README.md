@@ -1,3 +1,7 @@
+[![CI](https://github.com/mmasciol/yaml-fortran/workflows/CI/badge.svg?event=push)](https://github.com/mmasciol/yaml-fortran/actions?query=event%3Apush+branch%3Amain+workflow%3ACI)
+[![Coverage]()]()
+[![license](https://img.shields.io/github/license/mmasciol/yaml-fortran.svg)](https://img.shields.io/github/license/mmasciol/map-plus-plus)
+
 # YAML Fortran library
 
 A library to read `*.yaml` files in Fortran.
