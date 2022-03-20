@@ -38,9 +38,6 @@ jobs:
           path: build/*
           retention-days: 1
 
-      # - name: python vpython-venv
-      #   run: . /.ci-venv/bin/activate
-
   test:
     needs: [build]
     runs-on: ubuntu-latest
