@@ -35,7 +35,7 @@ jobs:
         run: make compile-yaml-fortran
 
       - name: python virtual environment
-        run: source /.ci-venv/bin/activate
+        run: . /.ci-venv/bin/activate
 
 
 
