@@ -11,7 +11,7 @@ jobs:
   #   runs-on: ubuntu-latest
 
   build:
-    name: "Terraform"
+    name: build
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,7 @@ jobs:
         run: make install-dependencies
 
       - name: compile
-        run: makw compile-yaml-fortran
+        run: make compile-yaml-fortran
 
 
 
