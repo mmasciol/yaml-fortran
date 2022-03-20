@@ -10,21 +10,13 @@
 
 .PHONY: install-dependencies
 install-dependencies:
-	apt-get install -y cmake
-	apt-get install -y gfortran
-	apt-get install -y g++
-	apt-get install -y gcc
+	apt-get update
+	apt-get install -y cmake gfortran g++ git gcc
 
 .PHONY: compile-yaml-fortran
 compile-yaml-fortran:
-	mkdir build
-	ls -la
-	pwd
-	cd build
-	pwd
-	ls -la ../
 	cmake -DYAML_BUILD_SHARED_LIBS=ON -B build
-	make -j4
+	make -C ./build -j4
 
 .PHONY: make-documenation
 make-documenation:
