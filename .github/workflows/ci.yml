@@ -70,16 +70,14 @@ jobs:
           chmod +x ./bin/*
           make test-memory-check
 
-  build-doc:
+  test-coverage-report:
     needs: [build]
     runs-on: ubuntu-latest
     container:
       image: mdmasciola/gh-yaml-fortran:latest
     steps:
-      # - name: checkout
-      #   uses: actions/checkout@v2
-      #   with:
-      #     submodules: recursive
+      - name: checkout
+        uses: actions/checkout@v2
       - name: download binary artifact
         uses: actions/download-artifact@v3
         with:
