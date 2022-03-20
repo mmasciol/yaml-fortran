@@ -37,8 +37,8 @@ jobs:
       - name: build
         run: make install-dependencies
 
-    #   - name: compile
-    #     run: make compile-yaml-fortran
+      - name: compile
+        run: make compile-yaml-fortran
 
 
 

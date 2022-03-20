@@ -24,7 +24,7 @@ compile-yaml-fortran:
 	pwd
 	ls -la ../
 	cmake -DYAML_BUILD_SHARED_LIBS=ON ..
-	make -j10
+	make -j4
 
 .PHONY: make-documenation
 make-documenation:
