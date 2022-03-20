@@ -72,10 +72,13 @@ jobs:
 
       - name: test-execution
         run: |
-          ls -la
           chmod +x ./bin/*
-          cd bin
-          ./test-map
+          make test-execution
+
+      - name: test-memory-check
+        run: |
+          chmod +x ./bin/*
+          make test-memory-check
 
   build-doc:
     needs: [build]

@@ -30,3 +30,10 @@ test-execution:
 	./bin/test-sequence
 	./bin/test-sequence-nest
 	./bin/test-sequence-map-pair
+
+.PHONY: test-memory-check
+test-memory-check:
+	valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=1 --leak-check=full ./bin/test-map
+	valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=1 --leak-check=full ./bin/test-sequence
+	valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=1 --leak-check=full ./bin/test-sequence-nest
+	valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=1 --leak-check=full ./bin/test-sequence-map-pair
