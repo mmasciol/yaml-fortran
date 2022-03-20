@@ -37,12 +37,12 @@ jobs:
           path: bin/*
           retention-days: 1
 
-      - name: archive build artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: build/*
-          retention-days: 1
+      # - name: archive build artifact
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: build
+      #     path: build/*
+      #     retention-days: 1
 
       # - name: python virtual environment
       #   run: . /.ci-venv/bin/activate
@@ -54,15 +54,20 @@ jobs:
       image: mdmasciola/gh-yaml-fortran:latest
 
     steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
       - name: download binary artifact
         uses: actions/download-artifact@v3
         with:
           name: binaries
 
-      - name: download build artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: build
+      # - name: download build artifact
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: build
 
       - name: test-execution
         run: |
