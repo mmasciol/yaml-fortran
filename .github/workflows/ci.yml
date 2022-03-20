@@ -56,11 +56,13 @@ jobs:
     steps:
       - name: download binary artifact
         uses: actions/download-artifact@v3
+        path: ./bin
         with:
           name: binaries
 
       - name: download build artifact
         uses: actions/download-artifact@v3
+        path: ./build
         with:
           name: build
 
