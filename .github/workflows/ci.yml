@@ -7,14 +7,10 @@ on:
   pull_request:
 
 jobs:
-  # build:
-  #   name: build
-  #   runs-on: ubuntu-latest
-
   build:
     runs-on: ubuntu-latest
     container:
-      image: ubuntu:20.04
+      image: mdmasciola/gh-yaml-fortran:latest
       # env:
       #   NODE_ENV: development
       # ports:
