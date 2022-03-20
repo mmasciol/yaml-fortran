@@ -25,7 +25,8 @@ make-documenation:
 
 .PHONY: test-execution
 test-execution:
+	cat ./bin/test.yaml
 	./bin/test-map
 	./bin/test-sequence
-	./bin/test-nest
+	./bin/test-sequence-nest
 	./bin/test-sequence-map-pair

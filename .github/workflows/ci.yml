@@ -77,6 +77,19 @@ jobs:
           cd bin
           ./test-map
 
+  build-doc:
+    needs: [build]
+    runs-on: ubuntu-latest
+    container:
+      image: mdmasciola/gh-yaml-fortran:latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+
       # - name: Setup Terraform
       #   uses: hashicorp/setup-terraform@v1
       #   with:
