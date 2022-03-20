@@ -18,7 +18,7 @@ markdown_extensions:
       enable_dollar_delimiter: True
   - markdown_include.include:
       base_path: docs
-  - markdown-fortran.wrap:
+  - markdown_fortran.wrap:
       base_path: docs
       encoding: 'utf-8'
   - admonition

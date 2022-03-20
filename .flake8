@@ -1,2 +1,2 @@
 [flake8]
-exclude = ./pkg/markdown-fortran/*
+exclude = ./pkg/markdown_fortran/*
