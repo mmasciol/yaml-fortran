@@ -15,13 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ubuntu:latest
-      env:
-        NODE_ENV: development
-      ports:
-        - 80
+      # env:
+      #   NODE_ENV: development
+      # ports:
+      #   - 80
       # volumes:
       #   - my_docker_volume:/home/runner/work/yaml-fortran/yaml-fortran
-      options: --cpus 1
+      # options: --cpus 1
 
     steps:
       - name: checkout
@@ -29,12 +29,16 @@ jobs:
         # with:
         #   submodules: recursive
 
+      - name: pre-build
+        run: |
+          apt-get update
+          apt-get install -y make
+
       - name: build
         run: make install-dependencies
-#
+
     #   - name: compile
     #     run: make compile-yaml-fortran
-#
 
 
 
