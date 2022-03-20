@@ -5,7 +5,7 @@
 # YAML Fortran library
 
 A library to read `*.yaml` files in Fortran.
-This project depends on [yaml-cpp](https://github.com/jbeder/yaml-cpp) and relies on a thin wrapper layer to handle API calls with yaml-cpp.
+This project depends on [yaml-cpp](https://github.com/jbeder/yaml-cpp) and implements a thin wrapper layer to handle API calls with yaml-cpp.
 
 ## Examples
 - [**YAML maps**](./test/test-map.f90)
