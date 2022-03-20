@@ -11,7 +11,9 @@
 .PHONY: install-dependencies
 install-dependencies:
 	apt-get update
-	apt-get install -y cmake gfortran g++ git gcc
+	TZ=Asia/Dubai
+	ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+	apt-get install -y cmake gfortran g++ git gcc tzdata
 
 .PHONY: compile-yaml-fortran
 compile-yaml-fortran:
