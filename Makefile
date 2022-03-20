@@ -12,7 +12,7 @@ compile-yaml-fortran: install-dependencies
 	mkdir ./build
 	ls -la
 	pwd
-	cd build
+	cd ./build
 	pwd
 	ls -la ../
 	cmake -DYAML_BUILD_SHARED_LIBS=ON ..
