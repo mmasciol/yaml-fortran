@@ -14,13 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mdmasciola/gh-yaml-fortran:latest
-      # env:
-      #   NODE_ENV: development
-      # ports:
-      #   - 80
-      # volumes:
-      #   - my_docker_volume:/home/runner/work/yaml-fortran/yaml-fortran
-      # options: --cpus 1
 
     steps:
       - name: checkout
@@ -62,7 +55,9 @@ jobs:
 
     steps:
       - name: test-execution
-        run: make test-execution
+        run: |
+          ls -la
+          make test-execution
 
       # - name: Setup Terraform
       #   uses: hashicorp/setup-terraform@v1
