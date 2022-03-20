@@ -8,6 +8,7 @@ build
 
 # -------- Unit test / coverage reports
 .coverage
+*.xml
 
 # -------- Compiled source
 *.dll

@@ -37,3 +37,13 @@ test-memory-check:
 	valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=1 --leak-check=full ./bin/test-sequence
 	valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=1 --leak-check=full ./bin/test-sequence-nest
 	valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=1 --leak-check=full ./bin/test-sequence-map-pair
+
+.PHONY: coverage-report
+coverage-report: test-execution
+	mkdir --parents .coverage/
+	gcovr --xml-pretty --exclude-unreachable-branches --print-summary -o coverage.xml --root ./
+	gcov -o ./build/src/yaml-fortran/CMakeFiles/yaml-interface.dir/*.f90.* ./src/yaml-wrapper/*.f90
+	mv ./build/src/yaml-fortran/CMakeFiles/yaml-interface.dir/*.gcda .coverage
+	mv ./build/src/yaml-fortran/CMakeFiles/yaml-interface.dir/*.gcno .coverage
+	lcov --gcov-tool gcov --capture --directory . --output-file .coverage/cov.info
+	genhtml --output-directory .coverage .coverage/cov.info

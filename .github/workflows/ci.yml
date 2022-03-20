@@ -14,35 +14,29 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mdmasciola/gh-yaml-fortran:latest
-
     steps:
       - name: checkout
         uses: actions/checkout@v2
         with:
           submodules: recursive
-
       - name: pre-build
         run: apt-get update
-
       - name: build
         run: make install-dependencies
-
       - name: compile
         run: make compile-yaml-fortran
-
       - name: archive binary artifact
         uses: actions/upload-artifact@v3
         with:
           name: binaries
           path: bin/*
           retention-days: 1
-
-      # - name: archive build artifact
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: build
-      #     path: build/*
-      #     retention-days: 1
+      - name: archive build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build/*
+          retention-days: 1
 
       # - name: python virtual environment
       #   run: . /.ci-venv/bin/activate
@@ -52,30 +46,26 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mdmasciola/gh-yaml-fortran:latest
-
     steps:
       - name: checkout
         uses: actions/checkout@v2
         with:
           submodules: recursive
-
       - name: download binary artifact
         uses: actions/download-artifact@v3
         with:
           name: binaries
           path: bin
-
-      # - name: download build artifact
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: build
-
-      - name: test-execution
+      - name: download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: build
+      - name: test execution
         run: |
           chmod +x ./bin/*
           make test-execution
-
-      - name: test-memory-check
+      - name: test memory leaks
         run: |
           chmod +x ./bin/*
           make test-memory-check
@@ -85,13 +75,31 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mdmasciola/gh-yaml-fortran:latest
-
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
+      # - name: checkout
+      #   uses: actions/checkout@v2
+      #   with:
+      #     submodules: recursive
+      - name: download binary artifact
+        uses: actions/download-artifact@v3
         with:
-          submodules: recursive
-
+          name: binaries
+          path: bin
+      - name: download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: build
+      - name: build coverage report
+        run: |
+          chmod +x ./bin/*
+          make coverage-report
+      - name: archive coverage report artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: .coverage/*
+          retention-days: 7
 
       # - name: Setup Terraform
       #   uses: hashicorp/setup-terraform@v1
