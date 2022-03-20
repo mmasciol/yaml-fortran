@@ -17,10 +17,10 @@ install-dependencies:
 
 .PHONY: compile-yaml-fortran
 compile-yaml-fortran:
-	mkdir ./build
+	mkdir build
 	ls -la
 	pwd
-	cd ./build
+	cd build
 	pwd
 	ls -la ../
 	cmake -DYAML_BUILD_SHARED_LIBS=ON ..
