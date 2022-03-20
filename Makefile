@@ -13,5 +13,7 @@ compile-yaml-fortran: install-dependencies
 	ls -la
 	pwd
 	cd build
+	pwd
+	ls -la ../
 	cmake -DYAML_BUILD_SHARED_LIBS=ON ..
 	make -j10
