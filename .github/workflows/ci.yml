@@ -1,4 +1,4 @@
-name: "Terraform"
+name: CI
 
 on:
   push:
@@ -7,48 +7,52 @@ on:
   pull_request:
 
 jobs:
-  terraform:
+  # lint:
+  #   runs-on: ubuntu-latest
+
+  build:
     name: "Terraform"
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v2
         with:
           submodules: recursive
 
-      - name: Make
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y cmake
-          sudo apt-get install -y gfortran
-          mkdir ./build
-          cd build
-          cmake -DYAML_BUILD_SHARED_LIBS=ON ..
-          make -j10
+      - name: build
+        run: make install-dependencies
+
+      - name: compile
+        run: makw compile-yaml-fortran
+
+
+
+
       # - name: Setup Terraform
       #   uses: hashicorp/setup-terraform@v1
       #   with:
       #     # terraform_version: 0.13.0:
       #     cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-# 
+#
       # # - name: Terraform Format
       # #   id: fmt
       # #   run: terraform fmt -check
-# 
+#
       # - name: Terraform Init
       #   id: init
       #   run: terraform init
-# 
+#
       # - name: Terraform Validate
       #   id: validate
       #   run: terraform validate -no-color
-# 
+#
       # - name: Terraform Plan
       #   id: plan
       #   if: github.event_name == 'pull_request'
       #   run: terraform plan -no-color
       #   continue-on-error: true
-# 
+#
       # - uses: actions/github-script@0.9.0
       #   if: github.event_name == 'pull_request'
       #   env:
@@ -75,8 +79,8 @@ jobs:
       # - name: Terraform Plan Status
       #   if: steps.plan.outcome == 'failure'
       #   run: exit 1
-# 
+#
       # - name: Terraform Apply
       #   # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       #   run: terraform apply -auto-approve
-# 
+#
