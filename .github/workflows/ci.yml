@@ -7,35 +7,33 @@ on:
   pull_request:
 
 jobs:
-  # lint:
-  #   runs-on: ubuntu-latest
-
   # build:
   #   name: build
   #   runs-on: ubuntu-latest
 
-  container:
-    image: ubuntu:latest
-    # env:
-    #   NODE_ENV: development
-    # ports:
-    #   - 80
-    volumes:
-      - my_docker_volume:/home/runner/work/yaml-fortran/yaml-fortran
-    options: --cpus 1
+  build:
+    container:
+      image: ubuntu:latest
+      env:
+        NODE_ENV: development
+      ports:
+        - 80
+      volumes:
+        - my_docker_volume:/home/runner/work/yaml-fortran/yaml-fortran
+      options: --cpus 1
 
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-        # with:
-        #   submodules: recursive
-
-      # - name: build
-      #   run: make install-dependencies
-
-      - name: compile
-        run: make compile-yaml-fortran
-
+    # steps:
+    #   - name: checkout
+    #     uses: actions/checkout@v2
+    #     # with:
+    #     #   submodules: recursive
+#
+    #   # - name: build
+    #   #   run: make install-dependencies
+#
+    #   - name: compile
+    #     run: make compile-yaml-fortran
+#
 
 
 
