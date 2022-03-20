@@ -63,6 +63,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: binaries
+          path: bin
 
       # - name: download build artifact
       #   uses: actions/download-artifact@v3
