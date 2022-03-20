@@ -10,9 +10,10 @@
 
 .PHONY: install-dependencies
 install-dependencies:
-	sudo apt-get update -y
-	sudo apt-get install -y cmake
-	sudo apt-get install -y gfortran
+	apt-get install -y cmake
+	apt-get install -y gfortran
+	apt-get install -y g++
+	apt-get install -y gcc
 
 .PHONY: compile-yaml-fortran
 compile-yaml-fortran: install-dependencies
