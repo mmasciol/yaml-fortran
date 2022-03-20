@@ -23,7 +23,7 @@ compile-yaml-fortran:
 	cd build
 	pwd
 	ls -la ../
-	cmake -DYAML_BUILD_SHARED_LIBS=ON ..
+	cmake -DYAML_BUILD_SHARED_LIBS=ON -B build
 	make -j4
 
 .PHONY: make-documenation
