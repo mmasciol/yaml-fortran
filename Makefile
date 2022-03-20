@@ -1,17 +1,18 @@
 # Set default shell to bash
-# SHELL := /bin/bash -o pipefail
+SHELL := /bin/bash -o pipefail
 
-#
-# .virtualenv:
-#     virtualenv -p python3 .virtualenv
-#     . .virtualenv/bin/activate; \
-#     pip install -r requirements.txt -r requirements_test.txt
-#
+.PHONY: python-venv
+python-venv:
+	pip install virtualenv
+	virtualenv .ci-venv
+	.ci-venv/bin/pip install -r requirements.txt
+
+# source ./.ci-venv/bin/activate
 
 .PHONY: install-dependencies
 install-dependencies:
 	apt-get update
-	apt-get install -y cmake gfortran g++ git gcc tzdata
+	apt-get install -y cmake g++ gcc gcovr gfortran ggcov git lcov make python-is-python3 python3-pip python3.8-venv tzdata valgrind
 
 .PHONY: compile-yaml-fortran
 compile-yaml-fortran:

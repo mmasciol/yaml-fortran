@@ -4,6 +4,7 @@ bin
 build
 .terraform
 .DS_Store
+.ci-venv
 
 # -------- Unit test / coverage reports
 .coverage
