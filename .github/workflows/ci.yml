@@ -116,7 +116,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: _docs
-          path: _doc/*
+          path: _docs/*
           retention-days: 1
 
 
