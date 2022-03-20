@@ -65,6 +65,9 @@ jobs:
           name: binaries
           path: bin
 
+      - name: test-execution
+        run: make test-execution
+
       # - name: download build artifact
       #   uses: actions/download-artifact@v3
       #   with:
@@ -74,7 +77,6 @@ jobs:
         run: |
           ls -la
           chmod +x ./bin/*
-          chmod +x ./build/*
           make test-execution
 
       # - name: Setup Terraform
