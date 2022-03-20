@@ -19,10 +19,6 @@ compile-yaml-fortran:
 	cmake -DYAML_BUILD_SHARED_LIBS=ON -B build
 	make -C ./build -j4
 
-.PHONY: make-documenation
-make-documenation:
-	mkdocs build --strict --config-file ./mkdocs.yml
-
 .PHONY: test-execution
 test-execution:
 	cat ./bin/test.yaml
@@ -48,6 +44,6 @@ coverage-report: test-execution
 	lcov --gcov-tool gcov --capture --directory . --output-file .coverage/cov.info
 	genhtml --output-directory .coverage .coverage/cov.info
 
-.PHONY: make-documentation
-make-documentation:
+.PHONY: documentation
+documentation:
 	mkdocs build --strict --config-file ./mkdocs.yml

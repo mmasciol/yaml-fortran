@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# type: ignore
+#type: ignore
 import ast
 import codecs
 import logging
@@ -91,18 +91,20 @@ class FortranPreprocessor(Preprocessor):
                     else:
                         raise ValueError('File extension not supported')
 
-                    if include_doc:
-                        added_string = f.get_docstring()
-                    elif func_name == 'doc':  # for python
-                        added_string = f.get_docstring()
+                    if include_doc:  # added function string
+                        added_string = f.get_docstring(func_name)
+                    elif func_name == 'doc':
+                        added_string = f.get_header_docstring()  # added file header for py and f90
                     else:
                         added_string = f.get_code()
 
-                    added_string = added_string.replace('\r', '').split('\n')
-                    for i, n in enumerate(added_string):
-                        added_string[i] = '{}{}\n'.format(lead_spaces, n)
-                    added_string = ''.join(added_string)
-                    lines = lines[:loc] + [added_string] + lines[loc+1:]
+                    if added_string:
+                        added_string = added_string.replace(
+                            '\r', '').split('\n')
+                        for i, n in enumerate(added_string):
+                            added_string[i] = '{}{}\n'.format(lead_spaces, n)
+                        added_string = ''.join(added_string)
+                        lines = lines[:loc] + [added_string] + lines[loc+1:]
             else:
                 break
         return lines
@@ -112,12 +114,29 @@ def makeExtension(*args, **kwargs):
     return MarkdownFortran(kwargs)
 
 
+class FHeader:
+    def __init__(self, block: str) -> None:
+        self.__doc = [w.replace('!>', '')
+                      for w in re.findall('^!>.*$', block, re.MULTILINE)]
+        self.__doc = [d if (0 < len(d)) else ' ' for d in self.__doc]
+
+    @property
+    def block(self) -> str:
+        return self.__block
+
+    @property
+    def doc(self) -> str:
+        t = ''
+        for d in self.__doc:
+            t = '{}\n{}'.format(t, d[1::])  # t + d.replace('\r', '\n')
+        return t
+
+
 class FSubroutine:
     def __init__(self, block: str) -> None:
         self.__p = re.compile(
-            'subroutine\s([\s\S]*?)\(')  # get subroutine name
-        # find the doc string delimited with "!>"
-        self.__doc = re.findall('!>.+?(.*)', block)
+            '(function|subroutine|type)\s*?,?\s?((bind|extends)\([a-zA-Z0-9_.-]*\))?\s*(::)?(\s*)?([a-zA-Z0-9_.-]*)\(?')  # get subr name
+        self.__doc = re.findall('.!>.+?(.*)', block)
         self.__block = block  # re.split('\n|\r', block)
         self.__name = self._get_name()
 
@@ -129,25 +148,35 @@ class FSubroutine:
     def doc(self) -> str:
         t = ''
         for d in self.__doc:
-            t = t + d.replace('\r', '\n')
+            if d:
+                if d[1] == '#':
+                    t = '{}\n{}'.format(t, d)
+                else:
+                    t = '{}\n> {}'.format(t, d)
         return t
 
     def _get_name(self) -> str:
-        return self.__p.search(self.__block).group(1)
+        try:
+            groups = self.__p.search(self.__block).group(6)
+            return groups
+        except AttributeError:
+            return None
 
 
 class FDocStrings:
     def __init__(self, text: List[str], func_name: Optional[str]) -> None:
-        self.__text: str = ''
+        self.__headers: List[FHeader] = []
         self.__subroutines: List[FSubroutine] = []
-        pattern_sub = '(\s?.*(?:subroutine.*)([\s\S]*?)(?:end subroutine.*)+)'
+        pattern_sub = '(\s?.*(?:(subroutine|function|type).*)([\s\S]*?)(?:((end subroutine)|(end function)|(end type)).*)+)'
         pattern_doc = '!>.+?(.*)'  # find the doc string delimited with "!>"
+        self.__blocks = re.findall(pattern_sub, text)
         blocks = re.findall(pattern_sub, text)
-        doc = re.findall(pattern_doc, text)
 
         if func_name == 'doc':
             s = FSubroutine(text)
+            h = FHeader(text)
             self.__subroutines.append(s)
+            self.__headers.append(h)
         else:
             for b in blocks:
                 s = FSubroutine(b[0][1::])
@@ -159,14 +188,30 @@ class FDocStrings:
     def get_code(self) -> str:
         t = ''
         for s in self.__subroutines:
-            t += s.block
+            new_lines = self._remove_comments(s.block)
+            t += new_lines
         return t
 
-    def get_docstring(self) -> str:
+    def _remove_comments(self, block: str) -> str:
+        f = ''
+        lines = block.split('\n')
+        for line in lines:
+            if '!>' not in line:
+                f = '{}\n{}'.format(f, line)
+        return f
+
+    def get_header_docstring(self) -> str:
         t = ''
-        for s in self.__subroutines:
-            t += s.doc
+        for h in self.__headers:
+            t += h.doc
         return t
+
+    def get_docstring(self, func_name: str) -> str:
+        t = ''
+        for b in self.__blocks:
+            s = FSubroutine(b[0][1::])
+            if func_name == s._get_name():
+                return s.doc
 
 
 class PyDocString:
@@ -185,7 +230,10 @@ class PyDocString:
     def get_code(self) -> str:
         return self.__text
 
-    def get_docstring(self) -> str:
+    def get_docstring(self, func_name: str) -> str:
+        return ''
+
+    def get_header_docstring(self) -> str:
         return self.__text
 
     def _get_function(self, text, func_name) -> str:

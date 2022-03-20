@@ -38,7 +38,7 @@ jobs:
           path: build/*
           retention-days: 1
 
-      # - name: python virtual environment
+      # - name: python vpython-venv
       #   run: . /.ci-venv/bin/activate
 
   test:
@@ -98,6 +98,27 @@ jobs:
           name: coverage
           path: .coverage/*
           retention-days: 7
+
+  documentation:
+    needs: [test-coverage-report]
+    runs-on: ubuntu-latest
+    container:
+      image: mdmasciola/gh-yaml-fortran:latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: build documenation
+        run: |
+          . /.ci-venv/bin/activate
+          pip install -r requirements.txt
+          make documentation
+      - name: archive documentation artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: _docs
+          path: _doc/*
+          retention-days: 1
+
 
       # - name: Setup Terraform
       #   uses: hashicorp/setup-terraform@v1
