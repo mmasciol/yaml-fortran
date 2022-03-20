@@ -37,9 +37,6 @@ jobs:
           path: bin/*
           retention-days: 1
 
-      - name: test-execution
-        run: make test-execution
-
       # - name: archive build artifact
       #   uses: actions/upload-artifact@v3
       #   with:
