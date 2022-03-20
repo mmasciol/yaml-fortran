@@ -1,0 +1,10 @@
+ansi2html
+flake8
+mkdocs
+mkdocstrings
+mkdocs-macros-plugin
+mkdocs-material
+markdown-include
+mypy
+pkg/markdown_fortran
+python-markdown-math

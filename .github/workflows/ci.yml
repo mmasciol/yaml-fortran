@@ -1,0 +1,177 @@
+# https://docs.docker.com/ci-cd/github-actions/
+# https://github.com/docker/build-push-action/issues/225
+
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: mdmasciola/gh-yaml-fortran:latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: pre-build
+        run: apt-get update
+      - name: build
+        run: make install-dependencies
+      - name: compile
+        run: make compile-yaml-fortran
+      - name: archive binary artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: binaries
+          path: bin/*
+          retention-days: 1
+      - name: archive build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build/*
+          retention-days: 1
+
+      # - name: python vpython-venv
+      #   run: . /.ci-venv/bin/activate
+
+  test:
+    needs: [build]
+    runs-on: ubuntu-latest
+    container:
+      image: mdmasciola/gh-yaml-fortran:latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: download binary artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: binaries
+          path: bin
+      - name: download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: build
+      - name: test execution
+        run: |
+          chmod +x ./bin/*
+          make test-execution
+      - name: test memory leaks
+        run: |
+          chmod +x ./bin/*
+          make test-memory-check
+
+  test-coverage-report:
+    needs: [build]
+    runs-on: ubuntu-latest
+    container:
+      image: mdmasciola/gh-yaml-fortran:latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: download binary artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: binaries
+          path: bin
+      - name: download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: build
+      - name: build coverage report
+        run: |
+          chmod +x ./bin/*
+          make coverage-report
+      - name: archive coverage report artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: .coverage/*
+          retention-days: 7
+
+  documentation:
+    needs: [test-coverage-report]
+    runs-on: ubuntu-latest
+    container:
+      image: mdmasciola/gh-yaml-fortran:latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: build documenation
+        run: |
+          . /.ci-venv/bin/activate
+          pip install -r requirements.txt
+          make documentation
+      - name: archive documentation artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: _docs
+          path: _docs/*
+          retention-days: 1
+
+
+      # - name: Setup Terraform
+      #   uses: hashicorp/setup-terraform@v1
+      #   with:
+      #     # terraform_version: 0.13.0:
+      #     cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+#
+      # # - name: Terraform Format
+      # #   id: fmt
+      # #   run: terraform fmt -check
+#
+      # - name: Terraform Init
+      #   id: init
+      #   run: terraform init
+#
+      # - name: Terraform Validate
+      #   id: validate
+      #   run: terraform validate -no-color
+#
+      # - name: Terraform Plan
+      #   id: plan
+      #   if: github.event_name == 'pull_request'
+      #   run: terraform plan -no-color
+      #   continue-on-error: true
+#
+      # - uses: actions/github-script@0.9.0
+      #   if: github.event_name == 'pull_request'
+      #   env:
+      #     PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     script: |
+      #       const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+      #       #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+      #       #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+      #       #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+      #       <details><summary>Show Plan</summary>
+      #       \`\`\`\n
+      #       ${process.env.PLAN}
+      #       \`\`\`
+      #       </details>
+      #       *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+      #       github.issues.createComment({
+      #         issue_number: context.issue.number,
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         body: output
+      #       })
+      # - name: Terraform Plan Status
+      #   if: steps.plan.outcome == 'failure'
+      #   run: exit 1
+#
+      # - name: Terraform Apply
+      #   # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   run: terraform apply -auto-approve
+#
