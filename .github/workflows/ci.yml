@@ -22,8 +22,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-        # with:
-        #   submodules: recursive
+        with:
+          submodules: recursive
 
       - name: pre-build
         run: |
