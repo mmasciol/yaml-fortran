@@ -1,0 +1,10 @@
+ansi2html
+flake8
+mkdocs
+mkdocstrings
+mkdocs-macros-plugin
+mkdocs-material
+markdown-include
+mypy
+python-markdown-math
+# pip install pkg/markdown-fortran/
