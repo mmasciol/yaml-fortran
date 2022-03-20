@@ -26,3 +26,6 @@ make-documenation:
 .PHONY: test-execution
 test-execution:
 	./bin/test-map
+	./bin/test-sequence
+	./bin/test-nest
+	./bin/test-sequence-map-pair

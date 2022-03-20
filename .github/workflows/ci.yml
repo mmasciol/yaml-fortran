@@ -74,7 +74,8 @@ jobs:
         run: |
           ls -la
           chmod +x ./bin/*
-          make test-execution
+          cd bin
+          ./test-map
 
       # - name: Setup Terraform
       #   uses: hashicorp/setup-terraform@v1
