@@ -34,14 +34,14 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: binaries
-          path: ./bin
+          path: bin/*
           retention-days: 1
 
       - name: archive build artifact
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: ./build
+          path: build/*
           retention-days: 1
 
       # - name: python virtual environment
@@ -56,13 +56,11 @@ jobs:
     steps:
       - name: download binary artifact
         uses: actions/download-artifact@v3
-        path: ./bin
         with:
           name: binaries
 
       - name: download build artifact
         uses: actions/download-artifact@v3
-        path: ./build
         with:
           name: build
 
