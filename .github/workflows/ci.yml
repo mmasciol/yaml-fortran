@@ -12,6 +12,7 @@ jobs:
   #   runs-on: ubuntu-latest
 
   build:
+    runs-on: ubuntu-latest
     container:
       image: ubuntu:latest
       env:
