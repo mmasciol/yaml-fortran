@@ -1,4 +1,5 @@
 # https://docs.docker.com/ci-cd/github-actions/
+# https://github.com/docker/build-push-action/issues/225
 
 name: CI
 
@@ -35,6 +36,13 @@ jobs:
 
       - name: compile
         run: make compile-yaml-fortran
+
+      - name: upload binary artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: binaries
+          path: ./bin
+          retention-days: 1
 
       - name: python virtual environment
         run: . /.ci-venv/bin/activate
