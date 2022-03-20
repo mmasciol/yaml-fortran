@@ -5,6 +5,7 @@ build
 .terraform
 .DS_Store
 .ci-venv
+_docs
 
 # -------- Unit test / coverage reports
 .coverage
@@ -33,6 +34,7 @@ build
 *.h5
 *.bson
 *.bhb
+*.egg-info
 
 # -------- IDE Configs
 *.orig

@@ -7,4 +7,4 @@ mkdocs-material
 markdown-include
 mypy
 python-markdown-math
-# pip install pkg/markdown-fortran/
+./pkg/markdown-fortran

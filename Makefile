@@ -47,3 +47,7 @@ coverage-report: test-execution
 	mv ./build/src/yaml-fortran/CMakeFiles/yaml-interface.dir/*.gcno .coverage
 	lcov --gcov-tool gcov --capture --directory . --output-file .coverage/cov.info
 	genhtml --output-directory .coverage .coverage/cov.info
+
+.PHONY: make-documentation
+make-documentation:
+	mkdocs build --strict --config-file ./mkdocs.yml
