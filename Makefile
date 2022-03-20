@@ -22,3 +22,7 @@ compile-yaml-fortran:
 .PHONY: make-documenation
 make-documenation:
 	mkdocs build --strict --config-file ./mkdocs.yml
+
+.PHONY: test-execution
+test-execution:
+	./bin/test-map

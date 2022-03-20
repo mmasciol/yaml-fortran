@@ -37,17 +37,32 @@ jobs:
       - name: compile
         run: make compile-yaml-fortran
 
-      - name: upload binary artifact
+      - name: archive binary artifact
         uses: actions/upload-artifact@v3
         with:
           name: binaries
           path: ./bin
           retention-days: 1
 
-      - name: python virtual environment
-        run: . /.ci-venv/bin/activate
+      # - name: archive build artifact
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: build
+      #     path: ./build
+      #     retention-days: 1
 
+      # - name: python virtual environment
+      #   run: . /.ci-venv/bin/activate
 
+  test:
+    needs: [build]
+    runs-on: ubuntu-latest
+    container:
+      image: mdmasciola/gh-yaml-fortran:latest
+
+    steps:
+      - name: test-execution
+        run: make test-execution
 
       # - name: Setup Terraform
       #   uses: hashicorp/setup-terraform@v1
