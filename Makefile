@@ -1,5 +1,5 @@
 # Set default shell to bash
-SHELL := /bin/bash -o pipefail
+# SHELL := /bin/bash -o pipefail
 
 .PHONY: install-dependencies
 install-dependencies:
@@ -10,7 +10,8 @@ install-dependencies:
 .PHONY: compile-yaml-fortran
 compile-yaml-fortran: install-dependencies
 	mkdir ./build
-	ls -ls
+	ls -la
+	pwd
 	cd build
 	cmake -DYAML_BUILD_SHARED_LIBS=ON ..
 	make -j10
