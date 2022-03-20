@@ -16,7 +16,7 @@ install-dependencies:
 	apt-get install -y gcc
 
 .PHONY: compile-yaml-fortran
-compile-yaml-fortran: install-dependencies
+compile-yaml-fortran:
 	mkdir ./build
 	ls -la
 	pwd
