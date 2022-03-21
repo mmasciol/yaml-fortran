@@ -46,12 +46,12 @@
 !> deallocate(fpath)
 !> ```
 !>
-!> After importing the `YAMLRead` module, the next step is to declare the variables we will use. A [YAMLHandler](#yamlhandler)
-!> instance stores the file pointer and two [YAMLMap](#yamlmap)'s are declared as entry points into the
+!> After importing the `YAMLRead` module, the next step is to declare the variables we will use. A [YAMLHandler](interface.md#yamlhandler)
+!> instance stores the file pointer and two [YAMLMap](interface.md#yamlmap)'s are declared as entry points into the
 !> `parent_1` and `child_a` maps. Each hierarchial level requires its own YAMLMap declaration in order to safely manage
 !> memory associated with those nodes. Therefore, a YAMLMap cannot be resued once it is assigned unless it is destroyed.
 !>
-!> Next, we use the [yaml_start_from_map](#yaml_start_from_map) function to retrieve the lead
+!> Next, we use the [yaml_start_from_map](interface.md#yaml_start_from_map) function to retrieve the lead
 !> node to designate a location to start scouring the YAML file. Both `parent_1` and `parent_2` are valid lead nodes in the example file above.
 !> Now with the lead node set, we retrieve the `child_a` map through the `value_map` module procedure:
 !>
@@ -107,7 +107,7 @@
 !>
 !> One obvious difference is the delcaration of `yaml_start_from_sequence` to access the `parent_2` lead node.
 !> This function call is necessary since `parent_2` is a sequence. Another key difference is the declaration of
-!> [YAMLSequence](#yamlsequence) and [YAMLElement](#yamlelement) types in order to access interior
+!> [YAMLSequence](interface.md#yamlsequence) and [YAMLElement](interface.md#yamlelement) types in order to access interior
 !> parts of the sequence.
 !>
 !> Once variable `seq` is assigned, then interior elements can be accessed using the `element(...)` module
@@ -627,7 +627,7 @@ module YAMLRead
       !> Subroutine `yaml_close_file` must be called on each
       !> file opened with this function.
       !>
-      !> > * *Returns:* [YAMLHandler](yamlhndler) object
+      !> > * *Returns:* [YAMLHandler](#yamlhandler) object
       !> > * **fpath:** Path to YAML file. Can be absolute or relative.
       character(len=*), intent(in) :: fpath
 

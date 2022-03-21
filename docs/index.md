@@ -17,11 +17,11 @@ yaml-cpp in order to use the YAML Fortran library. This documentation should be 
 ## Terminology
 
 ### Access Types
-* **Handlers** are the YAML file pointers; see [YAMLHandler](user.md#yamlhandler)
-* **Sequences** are iterators, lists or arrays; see [YAMLSequence](#yamlsequence)
-* **Maps** are key-value pairs; see [YAMLMap](#yamlmap)
-* **Elements** are individual items in a YAMLSequence list; see [YAMLElement](#yamlelement)
-* **Fields** are scalar values, matrices, or strings. They represent terminus data in the YAML file; see [YAMLField](#yamlfield)
+* **Handlers** are the YAML file pointers; see [YAMLHandler](interface.md#yamlhandler)
+* **Sequences** are iterators, lists or arrays; see [YAMLSequence](interface.md#yamlsequence)
+* **Maps** are key-value pairs; see [YAMLMap](interface.md#yamlmap)
+* **Elements** are individual items in a YAMLSequence list; see [YAMLElement](interface.md#yamlelement)
+* **Fields** are scalar values, matrices, or strings. They represent terminus data in the YAML file; see [YAMLField](interface.md#yamlfield)
 
 ## Building
 
