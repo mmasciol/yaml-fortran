@@ -28,7 +28,7 @@ jobs:
       - name: deploy static site to bucket
         run: |
           . /.ci-venv/bin/activate
-          aws s3 sync ./doc/ s3://yaml-fortran.com --delete
+          aws s3 sync ./docs/ s3://yaml-fortran.com --delete
 
       # - name: pre-build
       #   run: apt-get update
