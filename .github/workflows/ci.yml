@@ -19,13 +19,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: recursive
-      - name: Configure AWS Credentials
+      - name: configure credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
           aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           aws-region: us-west-2
-      - name: Deploy static site to S3 bucket
+        run: . /.ci-venv/bin/activate
+      - name: deploy static site to bucket
         run: aws s3 sync ./doc/ s3://yaml-fortran.com --delete
 
       # - name: pre-build
