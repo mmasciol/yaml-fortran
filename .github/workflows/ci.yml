@@ -25,10 +25,10 @@ jobs:
           aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
           aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           aws-region: us-west-2
-      - name: load awscli
-        run: . /.ci-venv/bin/activate
       - name: deploy static site to bucket
-        run: aws s3 sync ./doc/ s3://yaml-fortran.com --delete
+        run: |
+          . /.ci-venv/bin/activate
+          aws s3 sync ./doc/ s3://yaml-fortran.com --delete
 
       # - name: pre-build
       #   run: apt-get update
