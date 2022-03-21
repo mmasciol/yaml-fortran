@@ -126,11 +126,13 @@ jobs:
           retention-days: 1
       - name: configure credentials
         uses: aws-actions/configure-aws-credentials@v1
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         with:
           aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
           aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           aws-region: us-west-2
       - name: deploy static site to bucket
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           . /.ci-venv/bin/activate
           aws s3 sync ./_docs/ s3://yaml-fortran.com --delete
