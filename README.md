@@ -1,13 +1,13 @@
 [![CI](https://github.com/mmasciol/yaml-fortran/workflows/CI/badge.svg?event=push)](https://github.com/mmasciol/yaml-fortran/actions?query=event%3Apush+branch%3Amain+workflow%3ACI)
 [![Coverage](https://codecov.io/gh/mmasciol/yaml-fortran/branch/main/graphs/badge.svg?token=RUQZ7NY0FU)](https://codecov.io/gh/mmasciol/yaml-fortran)
-[![license](https://img.shields.io/github/license/mmasciol/map-plus-plus.svg)](https://img.shields.io/github/license/mmasciol/map-plus-plus)
+[![license](https://img.shields.io/github/license/mmasciol/map-plus-plus.svg)](https://github.com/mmasciol/yaml-fortran/blob/main/LICENSE)
 
 # YAML Fortran library
 
 A library to read `*.yaml` files in Fortran.
 This project depends on [yaml-cpp](https://github.com/jbeder/yaml-cpp) and implements a thin wrapper layer to handle API calls with yaml-cpp.
 
-Official documentation page is located at [www.yaml-fortran.com](http://www.yaml-fortran.com)
+This library's documentation is located at [www.yaml-fortran.com](http://www.yaml-fortran.com).
 
 ## Examples
 - [**YAML maps**](./test/test-map.f90)

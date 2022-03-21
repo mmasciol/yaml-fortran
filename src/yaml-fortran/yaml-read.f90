@@ -1,26 +1,3 @@
-!> YAML is a data serialization language designed to be human-readable for transfering stateless
-!> data in and out of programs. YAML is fully operational through three basic primitives: mappings
-!> (hashes/dictionaries), sequences (arrays/lists) and scalars (strings/numbers).  This fortran
-!> interface supports the extraction of these primitives. You can read more about the [YAML
-!> specification here](https://yaml.org/spec/1.2.2/).
-!>
-!> ???+ info
-!>     This library only supports YAML reading/parsing, not the creation or generation of YAML files.
-!>
-!> This project depends on the C++ project [YAML-cpp](https://github.com/jbeder/yaml-cpp). A C wrapper is created
-!> to connect Fortran with the YAML-cpp library and acts as a client to broker information between YAML-cpp and the Fortran destination.
-!> As this thin wrapper layer is an interface to the YAML-cpp implementation, most users do not need to be famliar with
-!> YAML-cpp in order to use the YAML Fortran library. This documentation should be all a developer needs in order to begin using it.
-!>
-!> ## Terminology
-!>
-!> ### Access Types
-!> * **Handlers** are the YAML file pointers; see [YAMLHandler](#yamlhandler)
-!> * **Sequences** are iterators, lists or arrays; see [YAMLSequence](#yamlsequence)
-!> * **Maps** are key-value pairs; see [YAMLMap](#yamlmap)
-!> * **Elements** are individual items in a YAMLSequence list; see [YAMLElement](#yamlelement)
-!> * **Fields** are scalar values, matrices, or strings. They represent terminus data in the YAML file; see [YAMLField](#yamlfield)
-!>
 !> ## Reading a YAML File
 !>
 !> Our objective is to read value fields `parent_1` and `parent_2` from the following YAML `input.yaml` file:

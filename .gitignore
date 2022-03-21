@@ -35,6 +35,7 @@ _docs
 *.bson
 *.bhb
 *.egg-info
+*.tfstate
 
 # -------- IDE Configs
 *.orig
