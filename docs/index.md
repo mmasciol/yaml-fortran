@@ -1,10 +1,6 @@
 # Overview
 
-YAML-Fortran is a library for reading YAML files in Fortran.
-YAML is fully operational through three basic primitives: mappings
-(hashes/dictionaries), sequences (arrays/lists) and scalars (strings/numbers).  This fortran
-interface supports the extraction of these primitives. You can read more about the [YAML
-specification here](https://yaml.org/spec/1.2.2/).
+YAML-Fortran is a library for reading YAML files in Fortran. YAML is fully operational through three basic primitives: mappings (hashes/dictionaries), sequences (arrays/lists) and scalars (strings/numbers).  This fortran interface supports the extraction of these primitives. You can read more about the [YAML specification here](https://yaml.org/spec/1.2.2/).
 
 ???+ info
     This library only supports YAML reading/parsing, not the creation or generation of YAML files.
