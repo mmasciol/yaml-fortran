@@ -95,14 +95,15 @@ jobs:
           name: coverage
           path: .coverage/*
           retention-days: 7
-      - uses: codecov/codecov-action@v2
+      - name: coverage report badge
+        uses: codecov/codecov-action@v2
         with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          token: ${{secrets.CODECOV_TOKEN}}
           files: ./coverage.xml
-          flags: unittests # optional
-          name: codecov-umbrella # optional
-          fail_ci_if_error: true # optional (default = false)
-          # verbose: true # optional (default = false)
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          verbose: true
 
   documentation:
     needs: [test-coverage-report]
@@ -123,3 +124,15 @@ jobs:
           name: _docs
           path: _docs/*
           retention-days: 1
+      - name: configure credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        with:
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          aws-region: us-west-2
+      - name: deploy static site to bucket
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          . /.ci-venv/bin/activate
+          aws s3 sync ./_docs/ s3://yaml-fortran.com --delete

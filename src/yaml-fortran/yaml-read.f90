@@ -1,26 +1,3 @@
-!> YAML is a data serialization language designed to be human-readable for transfering stateless
-!> data in and out of programs. YAML is fully operational through three basic primitives: mappings
-!> (hashes/dictionaries), sequences (arrays/lists) and scalars (strings/numbers).  This fortran
-!> interface supports the extraction of these primitives. You can read more about the [YAML
-!> specification here](https://yaml.org/spec/1.2.2/).
-!>
-!> ???+ info
-!>     This library only supports YAML reading/parsing, not the creation or generation of YAML files.
-!>
-!> This project depends on the C++ project [YAML-cpp](https://github.com/jbeder/yaml-cpp). A C wrapper is created
-!> to connect Fortran with the YAML-cpp library and acts as a client to broker information between YAML-cpp and the Fortran destination.
-!> As this thin wrapper layer is an interface to the YAML-cpp implementation, most users do not need to be famliar with
-!> YAML-cpp in order to use the YAML Fortran library. This documentation should be all a developer needs in order to begin using it.
-!>
-!> ## Terminology
-!>
-!> ### Access Types
-!> * **Handlers** are the YAML file pointers; see [YAMLHandler](#yamlhandler)
-!> * **Sequences** are iterators, lists or arrays; see [YAMLSequence](#yamlsequence)
-!> * **Maps** are key-value pairs; see [YAMLMap](#yamlmap)
-!> * **Elements** are individual items in a YAMLSequence list; see [YAMLElement](#yamlelement)
-!> * **Fields** are scalar values, matrices, or strings. They represent terminus data in the YAML file; see [YAMLField](#yamlfield)
-!>
 !> ## Reading a YAML File
 !>
 !> Our objective is to read value fields `parent_1` and `parent_2` from the following YAML `input.yaml` file:
@@ -69,12 +46,12 @@
 !> deallocate(fpath)
 !> ```
 !>
-!> After importing the `YAMLRead` module, the next step is to declare the variables we will use. A [YAMLHandler](#yamlhandler)
-!> instance stores the file pointer and two [YAMLMap](#yamlmap)'s are declared as entry points into the
+!> After importing the `YAMLRead` module, the next step is to declare the variables we will use. A [YAMLHandler](interface.md#yamlhandler)
+!> instance stores the file pointer and two [YAMLMap](interface.md#yamlmap)'s are declared as entry points into the
 !> `parent_1` and `child_a` maps. Each hierarchial level requires its own YAMLMap declaration in order to safely manage
 !> memory associated with those nodes. Therefore, a YAMLMap cannot be resued once it is assigned unless it is destroyed.
 !>
-!> Next, we use the [yaml_start_from_map](#yaml_start_from_map) function to retrieve the lead
+!> Next, we use the [yaml_start_from_map](interface.md#yaml_start_from_map) function to retrieve the lead
 !> node to designate a location to start scouring the YAML file. Both `parent_1` and `parent_2` are valid lead nodes in the example file above.
 !> Now with the lead node set, we retrieve the `child_a` map through the `value_map` module procedure:
 !>
@@ -130,7 +107,7 @@
 !>
 !> One obvious difference is the delcaration of `yaml_start_from_sequence` to access the `parent_2` lead node.
 !> This function call is necessary since `parent_2` is a sequence. Another key difference is the declaration of
-!> [YAMLSequence](#yamlsequence) and [YAMLElement](#yamlelement) types in order to access interior
+!> [YAMLSequence](interface.md#yamlsequence) and [YAMLElement](interface.md#yamlelement) types in order to access interior
 !> parts of the sequence.
 !>
 !> Once variable `seq` is assigned, then interior elements can be accessed using the `element(...)` module
@@ -650,7 +627,7 @@ module YAMLRead
       !> Subroutine `yaml_close_file` must be called on each
       !> file opened with this function.
       !>
-      !> > * *Returns:* [YAMLHandler](yamlhndler) object
+      !> > * *Returns:* [YAMLHandler](#yamlhandler) object
       !> > * **fpath:** Path to YAML file. Can be absolute or relative.
       character(len=*), intent(in) :: fpath
 

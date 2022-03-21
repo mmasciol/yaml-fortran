@@ -7,8 +7,6 @@ python-venv:
 	virtualenv .ci-venv
 	.ci-venv/bin/pip install -r requirements.txt
 
-# source ./.ci-venv/bin/activate
-
 .PHONY: install-dependencies
 install-dependencies:
 	apt-get update

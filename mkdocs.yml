@@ -2,7 +2,7 @@ site_name: YAML Fortran
 site_description: YAML Fortran
 docs_dir: docs
 site_dir: _docs
-repo_url: https://github.com/mmasciol/yaml-fortran
+repo_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 edit_uri: ""
 use_directory_urls: false
 strict: true
@@ -45,5 +45,7 @@ theme:
 
 nav:
   - Overview: index.md
+  - Examples:
+    - Examples Reading a YAML File: example.md
   - Developer:
-    - Fortran YAML: user.md
+    - Interface Declarations: interface.md

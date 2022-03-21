@@ -1,7 +1,3 @@
-# Fortran YAML Library
-
-{#../src/yaml-fortran/yaml-read.f90.doc#}
-
 ## Interoperable Types
 
 {#../src/yaml-fortran/yaml-read.f90.YAMLHandler.doc#}
