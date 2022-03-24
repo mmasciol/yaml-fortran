@@ -113,6 +113,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
+        with:
+          submodules: recursive
       - name: build documenation
         run: |
           . /.ci-venv/bin/activate
