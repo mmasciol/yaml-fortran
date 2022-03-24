@@ -116,6 +116,8 @@ jobs:
       - name: build documenation
         run: |
           . /.ci-venv/bin/activate
+          ls -la pkg
+          ls -la pkg/mkdocs-fortran
           pip install -r requirements.txt
           make documentation
       - name: archive documentation artifact
