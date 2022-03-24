@@ -113,11 +113,11 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
+        with:
+          submodules: recursive
       - name: build documenation
         run: |
           . /.ci-venv/bin/activate
-          ls -la pkg
-          ls -la pkg/mkdocs-fortran
           pip install -r requirements.txt
           make documentation
       - name: archive documentation artifact
