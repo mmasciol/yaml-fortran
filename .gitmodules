@@ -1,6 +1,6 @@
 [submodule "pkg/yaml-cpp"]
     path = pkg/yaml-cpp
     url = https://github.com/jbeder/yaml-cpp
-[submodule ".\\pkg\\mkdocs-fortran"]
-    path = .\\pkg\\mkdocs-fortran
-    url = https://github.com/mmasciol/mkdocs-fortran.git
+[submodule ".pkg/mkdocs-fortran"]
+    path = .pkg/mkdocs-fortran
+    url = https://github.com/mmasciol/mkdocs-fortran
