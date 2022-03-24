@@ -7,5 +7,5 @@ mkdocs-macros-plugin
 mkdocs-material
 markdown-include
 mypy
-pkg/markdown_fortran
+pkg/mkdocs-fortran
 python-markdown-math
