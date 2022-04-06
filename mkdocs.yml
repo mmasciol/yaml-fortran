@@ -2,7 +2,7 @@ site_name: YAML Fortran
 site_description: YAML Fortran
 docs_dir: docs
 site_dir: _docs
-repo_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+repo_url: "https://github.com/mmasciol/yaml-fortran"
 edit_uri: ""
 use_directory_urls: false
 strict: true

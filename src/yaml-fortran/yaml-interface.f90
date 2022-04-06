@@ -57,7 +57,7 @@ module YAMLInterface
     end function c_yaml_load_file
 
 
-    function c_yaml_start_from_sequence(Domain, Label) result (Seq) &!, NList, Act) result (Seq) &
+    function c_yaml_start_from_sequence(Domain, Label) result (Seq) &
     bind(C, name="start_from_sequence")
       import
       type(c_ptr) :: Seq

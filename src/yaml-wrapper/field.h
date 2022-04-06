@@ -5,7 +5,6 @@
 
 #include "sys.h"
 
-
 struct Map;
 
 enum CTypesEnum {

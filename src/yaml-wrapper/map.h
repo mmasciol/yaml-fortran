@@ -12,7 +12,6 @@ using namespace std;
 
 struct Domain;
 struct Field;
-// struct Sequence;
 
 struct Map {
     vector<char*>* labels;
