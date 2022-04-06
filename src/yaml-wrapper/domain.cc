@@ -19,7 +19,6 @@ EXTERNCALL Domain* load_file(char* fpath)
 };
 
 
-
 EXTERNCALL void destroy_domain(Domain* domain)
 {
     delete domain->container;

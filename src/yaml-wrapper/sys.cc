@@ -1,8 +1,6 @@
 #include "sys.h"
 
-
 using namespace std;
-
 
 char* str_to_char(string str)
 {

@@ -23,8 +23,6 @@ struct Domain {
 #ifdef __cplusplus
 extern "C" {
 #endif
-    // Sequences work with std::vector<struct List*>*
-    // Maps work with struct List*
     EXTERNCALL Domain* load_file(char* fpath);
     EXTERNCALL void destroy_domain(Domain* domain);
 #ifdef __cplusplus

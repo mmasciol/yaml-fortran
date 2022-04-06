@@ -6,9 +6,7 @@
 #include "map.h"
 #include "domain.h"
 
-
 using namespace std;
-
 
 EXTERNCALL int get_sequence_size(Sequence* sequence)
 {

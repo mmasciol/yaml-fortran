@@ -2,9 +2,7 @@
 #include "map.h"
 #include "sequence.h"
 
-
 using namespace std;
-
 
 EXTERNCALL Field* get_field(Map* v, char* label)
 {

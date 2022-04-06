@@ -8,9 +8,7 @@
 #include "sequence.h"
 #include "field.h"
 
-
 using namespace std;
-
 
 EXTERNCALL Map* start_from_map(Domain* d, char* label)
 {
