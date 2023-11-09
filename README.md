@@ -17,6 +17,13 @@ This library's documentation is located at [www.yaml-fortran.com](http://www.yam
 
 # Building
 
+This project relies on two packages existing inside the `./pkg/` directory: [yaml-cpp](https://github.com/jbeder/yaml-cpp) and [mkdocs-fortran](https://github.com/mmasciol/mkdocs-fortran). You need to pull these git submodules before building otherwise the build will fail. You can do this with the following command (both windows and linux): 
+
+```bash
+$ git submodule init
+$ git submodule update
+```
+
 ## Build on linux:
 
 ```bash
