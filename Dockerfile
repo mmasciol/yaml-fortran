@@ -5,7 +5,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 COPY requirements.txt requirements.txt
 COPY Makefile Makefile
-COPY pkg/markdown_fortran pkg/markdown_fortran
+COPY pkg/mkdocs-fortran pkg/mkdocs-fortran
 
 RUN apt-get update && apt-get -y install make
 RUN make install-dependencies
