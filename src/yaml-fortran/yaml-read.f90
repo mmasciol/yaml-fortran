@@ -12,7 +12,8 @@
 !>   - item: 3 x 3 matrix.
 !>     value: [[1, 2, 3],[4, 5, 6],[7, 8, 9],[10, 11, 12]]
 !>   - item: 4 x 3 matrix
-!>     value: item_is_float_array_2d: [[1, 2, 3],[4, 5, 6],[7, 8, 9],[10, 11, 12]]
+!>     value: 
+!>         item_is_float_array_2d: [[1, 2, 3],[4, 5, 6],[7, 8, 9],[10, 11, 12]]
 !> ```
 !>
 !> Keys `parent_1` ad `parent_2` represent a map and a sequence, respectively. Shortly we will demonstrate
