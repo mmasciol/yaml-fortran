@@ -1,0 +1,9 @@
+diff --git a/markdown_fortran/wrap.py b/markdown_fortran/wrap.py
+index b0ce18e..e66ccb2 100644
+--- a/markdown_fortran/wrap.py
++++ b/markdown_fortran/wrap.py
+@@ -44,3 +44,3 @@ class MarkdownFortran(Extension):
+-    def extendMarkdown(self, md: Markdown, md_globals: Dict[Any, Any]) -> None:
++    def extendMarkdown(self, md: Markdown) -> None:
+         prep = FortranPreprocessor(md, self.getConfigs())
+         md.preprocessors.register(prep, 'wrap', 102)
