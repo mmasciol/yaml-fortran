@@ -9,6 +9,9 @@ on:
       - main
   pull_request:
 
+env:
+  AWS_REGION: us-east-1
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,7 +19,7 @@ jobs:
       image: mdmasciola/gh-yaml-fortran:latest
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: pre-build
@@ -26,13 +29,13 @@ jobs:
       - name: compile
         run: make compile-yaml-fortran
       - name: archive binary artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: binaries
           path: bin/*
           retention-days: 1
       - name: archive build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build
           path: build/*
@@ -45,16 +48,16 @@ jobs:
       image: mdmasciola/gh-yaml-fortran:latest
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: download binary artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: binaries
           path: bin
       - name: download build artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: build
           path: build
@@ -74,14 +77,14 @@ jobs:
       image: mdmasciola/gh-yaml-fortran:latest
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: download binary artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: binaries
           path: bin
       - name: download build artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: build
           path: build
@@ -90,7 +93,7 @@ jobs:
           chmod +x ./bin/*
           make coverage-report
       - name: archive coverage report artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage
           path: .coverage/*
@@ -112,29 +115,54 @@ jobs:
       image: mdmasciola/gh-yaml-fortran:latest
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: recursive
-      - name: build documenation
+      - name: patch mkdocs-fortran for markdown 3
+        run: |
+          patch_file="${GITHUB_WORKSPACE}/.github/patches/mkdocs-fortran-markdown3.patch"
+          if git -C pkg/mkdocs-fortran apply --check "${patch_file}"; then
+            git -C pkg/mkdocs-fortran apply "${patch_file}"
+          fi
+      - name: build documentation
         run: |
           . /.ci-venv/bin/activate
           pip install -r requirements.txt
           make documentation
       - name: archive documentation artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: _docs
           path: _docs/*
           retention-days: 1
-      - name: configure credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+  deploy-documentation:
+    needs: [documentation]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: download documentation artifact
+        uses: actions/download-artifact@v4
         with:
-          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
-          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-          aws-region: us-west-2
+          name: _docs
+          path: _docs
+      - name: configure credentials
+        uses: aws-actions/configure-aws-credentials@v6.2.3
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
       - name: deploy static site to bucket
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          SITE_BUCKET: ${{ secrets.SITE_BUCKET }}
         run: |
-          . /.ci-venv/bin/activate
-          aws s3 sync ./_docs/ s3://yaml-fortran.com --delete
+          test -n "${SITE_BUCKET}"
+          aws s3 sync ./_docs/ "s3://${SITE_BUCKET}" --delete
+      - name: invalidate cloudfront
+        env:
+          CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          test -n "${CLOUDFRONT_DISTRIBUTION_ID}"
+          aws cloudfront create-invalidation --distribution-id "${CLOUDFRONT_DISTRIBUTION_ID}" --paths "/*"

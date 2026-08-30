@@ -1,0 +1,11 @@
+{
+  "app": "npx ts-node --prefer-ts-exts bin/yaml-fortran-site.ts",
+  "context": {
+    "domainName": "yaml-fortran.com",
+    "siteSubdomain": "www",
+    "githubOwner": "mmasciol",
+    "githubRepo": "yaml-fortran",
+    "githubBranch": "main",
+    "replaceExistingDnsRecords": false
+  }
+}

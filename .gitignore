@@ -1,11 +1,15 @@
 # -------- directories
 artifacts
-bin
+/bin
 build
 .terraform
 .DS_Store
 .ci-venv
 _docs
+cdk.out
+cdk.context.json
+cdk-outputs.json
+node_modules
 
 # -------- Unit test / coverage reports
 .coverage
@@ -36,6 +40,7 @@ _docs
 *.bhb
 *.egg-info
 *.tfstate
+*.tsbuildinfo
 
 # -------- IDE Configs
 *.orig
